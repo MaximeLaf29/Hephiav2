@@ -8,7 +8,7 @@ const zeroNumber = { type: Number, default: 0 }
 const emptyString = { type: String, default: "" }
 const reqString = { type: String, required: true }
 const trueBool = { type: Boolean, default: true }
-const falseBool = { type: Boolean, default: true }
+const falseBool = { type: Boolean, default: false }
 
 // Message infos to be logged
 const messageLogger = {
