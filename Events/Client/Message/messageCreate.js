@@ -1,7 +1,6 @@
 const { Message, MessageEmbed } = require("discord.js")
-const { loadCommands } = require("../../../Handlers/commandHandler")
-const dbAPI = require("../../../dbDiscordAPI.js")
-Message
+const fileContext = "Events/Message/messageCreate.js, execute()"
+// Message creation event handler
 module.exports = {
   name: "messageCreate",
   /**
@@ -14,7 +13,7 @@ module.exports = {
 
     // Actions
     console.log(message.content)
-    message.reply("hahah!")
+    message.reply("hahah!").catch(console.log("There was an error replying. " + fileContext))
     // check for bumps
     // BlackListed words system here
     // exp system here (if no blacklisted words)
@@ -22,7 +21,7 @@ module.exports = {
     // invite link detector here
     // DB changes
     try {
-      await dbAPI.memberMessageIncrement(message.guild, message.author)
+      await client.db.memberMessageIncrement(message.guild, message.author)
     } catch (err) {
       console.log("ERROR! : " + err)
     }

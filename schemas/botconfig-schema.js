@@ -3,17 +3,19 @@ const mongoose = require("mongoose")
 // This schema is useful for the bot in case it crashes and some users join and/or leave while the bot is down
 // It can then use this list to update everything after comparing who is still in the server and who is gone.
 
+// Basic Types
 const zeroNumber = { type: Number, default: 0 }
 const emptyString = { type: String, default: "" }
 const reqString = { type: String, required: true }
 const trueBool = { type: Boolean, default: true }
-const falseBool = { type: Boolean, default: true }
+const falseBool = { type: Boolean, default: false }
 // A new type for every component of the Discord logger module, since any component can be logged in a different place
 const discordLoggerModuleType = {
   state: trueBool,
   channelToLog: emptyString
 }
 
+// A model by default of a message logging component
 const discordLoggerModuleTypeMessage = {
   state: trueBool,
   defaultChannelToLog: emptyString

@@ -2,6 +2,7 @@ async function loadCommands(client) {
   const { loadFiles } = require("../Functions/fileLoader")
   const ascii = require("ascii-table")
   const table = new ascii().setHeading("Commands", "Status")
+  const fileContext = "Handlers/commandHandler.js"
 
   await client.commands.clear()
   await client.subCommands.clear()
@@ -11,7 +12,6 @@ async function loadCommands(client) {
   const Files = await loadFiles("Commands")
 
   Files.forEach((file) => {
-    //console.log(file)
     const command = require(file)
 
     // If the command file loaded has subcommand(s) inside it

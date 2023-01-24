@@ -2,6 +2,7 @@ async function loadEvents(client) {
   const { loadFiles } = require("../Functions/fileLoader")
   const ascii = require("ascii-table")
   const table = new ascii().setHeading("Events", "Status")
+  const fileContext = "Handlers/commandHandler.js"
 
   await client.events.clear()
 

@@ -1,11 +1,13 @@
 const { ChatInputCommandInteraction, SlashCommandBuilder } = require("discord.js")
 const axios = require("axios")
 const wait = require("node:timers/promises").setTimeout
+const fileContext = "Commands/Developer/generate.js, execute()"
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("generate")
     .setDescription("Generate a picture.")
+    .setDMPermission(false)
     .addStringOption((options) => options.setName("prompt").setDescription("Enter your prompt").setMaxLength(512).setRequired(true)),
   /**
    *
@@ -36,14 +38,16 @@ module.exports = {
         const sfbuff = new Buffer.from(pictureBase64, "base64")
 
         //await wait(4000)
-        await interaction.editReply({ content: "Picture:", ephemeral: true, files: [{ attachment: sfbuff }] })
+        await interaction.editReply({ content: "Picture:", ephemeral: true, files: [{ attachment: sfbuff }] }).catch((error) => {
+          console.log("Can't edit reply to interaction! " + fileContext)
+        })
 
         /*await interaction.reply({
           
         })*/
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err + " - " + fileContext)
       })
   }
 }

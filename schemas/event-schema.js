@@ -5,7 +5,7 @@ const zeroNumber = { type: Number, default: 0 }
 const emptyString = { type: String, default: "" }
 const reqString = { type: String, required: true }
 const trueBool = { type: Boolean, default: true }
-const falseBool = { type: Boolean, default: true }
+const falseBool = { type: Boolean, default: false }
 
 // infos about a single world
 const worldInfos = {
@@ -87,6 +87,7 @@ const eventSchema = mongoose.Schema({
   listOfWorlds: { type: [worldInfos], default: [] }, // the list of world information
   eventType: { type: [eventTypeModel], default: [] }, // List of different type of event with their description
   listOfEvents: { type: [eventInfos], default: [] }, // The full list of events that has happened or will happen
+  hostRoleID: reqString, // the ID of the host role this config is for (need) (in case multiple server use it) Is required for ↓↓
   listOfEventTeamMembers: { type: [eventMemberInfos], default: [] }, // The full list of event team members
   eventMemberTypes: { type: [eventMemberType], default: [] } // The full list of event member types
 })

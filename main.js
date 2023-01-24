@@ -8,79 +8,51 @@ const mongo = require("./mongo")
 const userSchema = require("./schemas/user-schema")
 const configBotSchema = require("./schemas/botconfig-schema")
 const dbAPI = require("./dbDiscordAPI.js")
+const log = console.log.bind(console)
+const colors = require("colors")
+const fileContext = "main.js"
 
-const {
-  Client,
-  Intents,
-  Partials,
-  MessageActionRow,
-  MessageButton,
-  MessageAttachment,
-  MessageEmbed,
-  GatewayIntentBits,
-  Collection
-} = require("discord.js")
+const { Collection, IntentsBitField } = require("discord.js")
+const flags = IntentsBitField.Flags
 const intents = new Discord.IntentsBitField([
-  Discord.IntentsBitField.Flags.Guilds,
-  Discord.IntentsBitField.Flags.GuildMembers,
-  Discord.IntentsBitField.Flags.GuildMessages,
-  Discord.IntentsBitField.Flags.GuildPresences,
-  Discord.IntentsBitField.Flags.GuildMessageReactions,
-  Discord.IntentsBitField.Flags.MessageContent,
-  Discord.IntentsBitField.Flags.GuildMessageTyping,
-  Discord.IntentsBitField.Flags.GuildInvites,
-  Discord.IntentsBitField.Flags.GuildScheduledEvents
+  flags.Guilds,
+  flags.GuildMembers,
+  flags.GuildMessages,
+  flags.GuildPresences,
+  flags.GuildMessageReactions,
+  flags.MessageContent,
+  flags.GuildMessageTyping,
+  flags.GuildInvites,
+  flags.GuildScheduledEvents
 ])
 
-const client = new Discord.Client({
-  intents
-})
-
-const { loadEvents } = require("./Handlers/eventHandler")
-const { log } = require("console")
+const client = new Discord.Client({ intents })
 
 module.exports = { client }
 client.config = require("./config.json")
-client.reloading = false
-client.commands = new Collection()
-client.subCommands = new Collection()
-client.events = new Collection()
+client.reloading = false // if the client is reloading
+client.commands = new Collection() // all the commands
+client.subCommands = new Collection() // all the sub commands
+client.events = new Collection() // all the events
+client.guildConfigs = new Collection() // All the guild's configs
 
+// Connection to database
+mongo(client.config.mongoDatabaseURL).then(() => log("🔗 The client is now connected to the database. 🔗"))
+client.db = dbAPI // Linking all the database API requests to the client object for easier access
+log("Connected!".green) // Test for the colors library
+
+// Loading all the event handlers
+const { loadEvents } = require("./Handlers/eventHandler")
 loadEvents(client)
 
-// When bot turn on //
-client.on("ready", async () => {
-  console.log(`--------- Logged in as ${client.user.tag}! ---------\nReady!`)
+// We load all the guild's configs into the client object for easy access
+const { loadGuildConfigs } = require("./Functions/configLoader.js")
+loadGuildConfigs(client)
 
-  client.saveconfig()
-})
+// # Config stuff removed from here so it's more clean
+//--------- TEST ZONE -----------//
 
-//Function to save the current config to the config file on disk
-client.saveconfig = async function () {
-  try {
-    await fs.writeFileSync("config.json", JSON.stringify(client.config), utf8)
-    console.log("Config saved successfully.")
-  } catch (err) {
-    console.log("Error saving config: " + err)
-  } finally {
-    await client.loadconfig()
-    console.log("Config reloaded.")
-  }
-}
-
-// Function to load the current config in case of error or to simply refresh
-client.loadconfig = async function () {
-  try {
-    client.config = await JSON.parse(fs.readFileSync("./config.json"))
-    console.log("Config file Loaded successfully.")
-  } catch (err) {
-    console.log("Error loading config file: " + err)
-  } finally {
-    console.log("Config Loaded:")
-    console.log(client.config)
-  }
-  // client.config = require(fileName)
-}
+// -----------------------------
 
 // Bot login
 client.login(process.env.TOKEN)
