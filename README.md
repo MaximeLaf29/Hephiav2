@@ -4,7 +4,7 @@
 
 ## This is Hephia
 
-- ![Hephia Mascot](https://github.com/MaximeLaf29/Hephiav2/blob/main/mascot.png?raw=true)
+-   ![Hephia Mascot](https://github.com/MaximeLaf29/Hephiav2/blob/main/mascot.png?raw=true)
 
 ## This is a Personal project Called Hephia V2
 
@@ -20,14 +20,14 @@ Hephia V2 uses a MongoDB database and is meant to be self hosted.
 
 Current functionality:
 
-- Connection to local database.
-- Implementation of a few database calls to edit the number of message sent in chat.
-- All functions, commands and client events are in separated files and registered on bot's launch.
-- Multiple type of database schemas was created for multiple purpose and some in the wait of more development.
-- The bot can connect to Discord fine and is already able to listen to most events.
-- Any new functions or new event listener can be added and refreshed without having to restart the bot.
-- Includes a few slash commands already like /ping, /generate (for stable diffusion web server, if you have one running, just specify the port) and /reload with 2 sub commands: events and commands to reload the one specified.
-- Each slash commands can be designed for a group of people specified by a userID in the config.json.
-- Client can store information about all the guild's configuration
+-   Connection to local database.
+-   Implementation of a few database calls to edit the number of message sent in chat.
+-   All functions, commands and client events are in separated files and registered on bot's launch.
+-   Multiple type of database schemas was created for multiple purpose and some in the wait of more development.
+-   The bot can connect to Discord fine and is already able to listen to most events.
+-   Any new functions or new event listener can be added and refreshed without having to restart the bot.
+-   Includes a few slash commands already like /ping, /generate (for stable diffusion web server, if you have one running, just specify the port) and /reload with 2 sub commands: events and commands to reload the one specified.
+-   Each slash commands can be designed for a group of people specified by a userID in the config.json.
+-   Client can store information about all the guild's configuration
 
 Following the Second commit on January 24th, 2022, a dev brand will be used.
