@@ -29,3 +29,5 @@ Current functionality:
 - Includes a few slash commands already like /ping, /generate (for stable diffusion web server, if you have one running, just specify the port) and /reload with 2 sub commands: events and commands to reload the one specified.
 - Each slash commands can be designed for a group of people specified by a userID in the config.json.
 - Client can store information about all the guild's configuration
+
+Following the Second commit on January 24th, 2022, a dev brand will be used.
