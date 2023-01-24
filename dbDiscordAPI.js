@@ -7,7 +7,7 @@ async function userExistInDB(guild, userObj) {
     try {
         const result = await userSchema.find({
             guildID: guild.id,
-            userID: userObj.id,
+            userID: userObj.id
         })
 
         if (result.length == 1) {
@@ -29,7 +29,7 @@ async function memberCreateInDB(guild, userObj) {
             guildID: guild.id,
             userID: userObj.id,
             discordUsername: userObj.username,
-            discordTag: userObj.discriminator,
+            discordTag: userObj.discriminator
         }
         await new userSchema(user).save()
     } catch (err) {
@@ -48,16 +48,16 @@ async function memberGuildNicknameChanged(guild, oldMember, newMember) {
         const result = await userSchema.findOneAndUpdate(
             {
                 guildID: guild.id,
-                userID: oldMember.id,
+                userID: oldMember.id
             },
             {
                 $push: {
-                    discordNicknameHistory: oldMember.nickname,
+                    discordNicknameHistory: oldMember.nickname
                 },
-                discordNickname: newMember.nickname,
+                discordNickname: newMember.nickname
             },
             {
-                upsert: true,
+                upsert: true
             }
         )
         if (!result) return false
@@ -79,12 +79,12 @@ async function memberMessageIncrement(guild, userObj) {
         const result = await userSchema.findOneAndUpdate(
             {
                 guildID: guild.id,
-                userID: userObj.id,
+                userID: userObj.id
             },
             {
                 $inc: {
-                    numberOfMessagesSent: 1,
-                },
+                    numberOfMessagesSent: 1
+                }
             }
         )
         if (!result) return false
@@ -100,5 +100,5 @@ module.exports = {
     userExistInDB,
     memberMessageIncrement,
     memberCreateInDB,
-    memberGuildNicknameChanged,
+    memberGuildNicknameChanged
 }

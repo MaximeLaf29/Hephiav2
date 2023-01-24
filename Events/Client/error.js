@@ -9,5 +9,5 @@ module.exports = {
      */
     execute(error, client) {
         console.log('An error occurred! -> ' + error)
-    },
+    }
 }

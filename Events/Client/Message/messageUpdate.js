@@ -12,5 +12,5 @@ module.exports = {
      */
     async execute(message, client) {
         // Loggings to discord following guild's config
-    },
+    }
 }

@@ -17,5 +17,5 @@ module.exports = {
             .catch((err) => {
                 console.log("Can't reply to interaction! " + fileContext)
             })
-    },
+    }
 }

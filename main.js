@@ -15,7 +15,7 @@ const intents = new Discord.IntentsBitField([
     flags.MessageContent,
     flags.GuildMessageTyping,
     flags.GuildInvites,
-    flags.GuildScheduledEvents,
+    flags.GuildScheduledEvents
 ])
 
 const client = new Discord.Client({ intents })

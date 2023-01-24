@@ -7,9 +7,9 @@ const userListLastSeenSchema = mongoose.Schema({
     guildID: {
         // the ID of the guild that owns these Datas
         type: String,
-        required: true,
+        required: true
     },
-    memberList: [String], // List of members that are members of this guild and currently in the guild
+    memberList: [String] // List of members that are members of this guild and currently in the guild
 })
 
 module.exports = mongoose.model('lastseenUsers', userListLastSeenSchema)

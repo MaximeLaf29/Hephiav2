@@ -12,13 +12,13 @@ const falseBool = { type: Boolean, default: false }
 // A new type for every component of the Discord logger module, since any component can be logged in a different place
 const discordLoggerModuleType = {
     state: trueBool,
-    channelToLog: emptyString,
+    channelToLog: emptyString
 }
 
 // A model by default of a message logging component
 const discordLoggerModuleTypeMessage = {
     state: trueBool,
-    defaultChannelToLog: emptyString,
+    defaultChannelToLog: emptyString
 }
 
 // Specially, roles can also be logged in another channel on top of being logged. It can also include a custom message you can setup
@@ -29,27 +29,27 @@ const loggerRoleSpecialMessage = {
             // array of role information
             roleId: emptyString, // the role target for a message
             messageChannel: emptyString, // where the message will be sent for that role
-            message: emptyString, // if this is empty then the default one will be used.
-        },
-    ],
+            message: emptyString // if this is empty then the default one will be used.
+        }
+    ]
 }
 
 // For special additional message when a user join or leave the server
 const loggerJoinLeaveSpecialMessage = {
     messageState: falseBool, // if the message in another channel should be used
     messageChannel: emptyString, // where the message will be sent for that join/leave event
-    message: emptyString, // if this is empty then the default one will be used.
+    message: emptyString // if this is empty then the default one will be used.
 }
 
 const loggerModerationSpecialMessage = {
     messageState: falseBool, // if the message in another channel should be used
     messageChannel: emptyString, // where the message will be sent for that moderation action
-    message: emptyString, // if this is empty then the default one will be used.
+    message: emptyString // if this is empty then the default one will be used.
 }
 
 const loggerModerationType = {
     discordLoggerModuleType,
-    loggerModerationSpecialMessage,
+    loggerModerationSpecialMessage
 }
 
 const ticketType = {
@@ -63,7 +63,7 @@ const ticketType = {
     ticketNamingScheme: emptyString, // How the ticket should be named. Multiple placeholder will be supported. See at the end.
     openingMessage: emptyString, // The message being sent in the ticket when it opens
     pingRole: falseBool, // switch whether or not roles will be pinged
-    roleToPing: { type: [String], default: [] }, // list of roles being pinged when a ticket is opened
+    roleToPing: { type: [String], default: [] } // list of roles being pinged when a ticket is opened
 }
 
 const configBotSchema = mongoose.Schema({
@@ -78,16 +78,16 @@ const configBotSchema = mongoose.Schema({
             loggerRoleSpecialMessage,
             defaultMessage: {
                 type: String,
-                default: 'User {USER} has received the {ROLE} role.',
-            },
+                default: 'User {USER} has received the {ROLE} role.'
+            }
         },
         roleRemove: {
             discordLoggerModuleType,
             loggerRoleSpecialMessage,
             defaultMessage: {
                 type: String,
-                default: 'User {USER} lost the {ROLE} role.',
-            },
+                default: 'User {USER} lost the {ROLE} role.'
+            }
         },
         roleCreate: discordLoggerModuleType,
         roleDelete: discordLoggerModuleType,
@@ -111,58 +111,58 @@ const configBotSchema = mongoose.Schema({
             loggerJoinLeaveSpecialMessage,
             defaultMessage: {
                 type: String,
-                default: '{USER} just JOINED the server.',
-            },
+                default: '{USER} just JOINED the server.'
+            }
         },
         leave: {
             discordLoggerModuleType,
             loggerJoinLeaveSpecialMessage,
             defaultMessage: {
                 type: String,
-                default: '{USER} just LEFT the server.',
-            },
+                default: '{USER} just LEFT the server.'
+            }
         },
         // Moderation Logging
         ban: {
             loggerModerationType,
             defaultMessage: {
                 type: String,
-                default: '{USER} was BANNED from the server.',
-            },
+                default: '{USER} was BANNED from the server.'
+            }
         },
         unban: {
             loggerModerationType,
             defaultMessage: {
                 type: String,
-                default: '{USER} was UNBANNED from the server.',
-            },
+                default: '{USER} was UNBANNED from the server.'
+            }
         },
         kick: {
             loggerModerationType,
             defaultMessage: {
                 type: String,
-                default: '{USER} was KICKED from the server.',
-            },
+                default: '{USER} was KICKED from the server.'
+            }
         },
         timeout: {
             loggerModerationType,
             defaultMessage: {
                 type: String,
-                default: '{USER} was TIMED OUT for {TIME}.',
-            },
+                default: '{USER} was TIMED OUT for {TIME}.'
+            }
         },
         joinInstaKick: discordLoggerModuleType,
         // test: trueBool,
         botConfig: {
             // Log on Discord when the bot's config has been changed (warning)
             state: falseBool,
-            channelToLog: emptyString,
+            channelToLog: emptyString
         },
         botSelfLog: {
             // Either if you want the bot to log it's own events or not like messages and such
             state: falseBool,
-            channelToLog: emptyString,
-        },
+            channelToLog: emptyString
+        }
 
         // Down here will be all the other stuff we want to be able to log either now or in the future!
         //
@@ -181,16 +181,16 @@ const configBotSchema = mongoose.Schema({
                     loggingChannelID: emptyString, // Where to log the message edit or removal
                     loggingChannelName: emptyString, // Only for database better reading, name of the logging channel
                     loggingSwitch: falseBool, // Whether or not to use this filter for logging
-                    listOfChannels: { type: [String], default: [] }, // List of channels to listen to
-                },
-            ],
-        },
+                    listOfChannels: { type: [String], default: [] } // List of channels to listen to
+                }
+            ]
+        }
     },
     serverLocked: falseBool, // If turned on, no one will be able to join the server
     whitelist: {
         ModuleSwitchState: falseBool, // Is this is set to FALSE, the whitelist will NOT be taken into consideration
         // If the server is locked, only those that are whitelist can get in
-        userWhitelisted: { type: [String], default: [] },
+        userWhitelisted: { type: [String], default: [] }
     },
     joinLimitCount: zeroNumber,
     maxAutoKickForBan: zeroNumber,
@@ -199,12 +199,12 @@ const configBotSchema = mongoose.Schema({
     autoGiveRolesOnJoin: {
         // List of roles to be given automatically upon joining the guild
         ModuleSwitchState: falseBool, // If we turn off the plugin to auto give role completely
-        roleList: { type: [String], default: [] },
+        roleList: { type: [String], default: [] }
     },
     ticketSystem: {
         // Custom Ticket system to be done to replace TicketBot
         type: [String],
-        default: [],
+        default: []
         // [TODO]
         // message autopost + switch
         // team?
@@ -219,7 +219,7 @@ const configBotSchema = mongoose.Schema({
         // [TODO] system for giving back role on a user who came back
         // list of blacklisted role IDs to not give back + switch (true default) for ignoring role with server manage permissions
         type: [String],
-        default: [],
+        default: []
     },
     expSystem: {
         expTurnedOn: falseBool,
@@ -233,8 +233,8 @@ const configBotSchema = mongoose.Schema({
         levelAutoRole: {
             // Multiple roles can be given when certain level are reached
             type: [{ level: Number, role: [String] }],
-            default: [],
-        },
+            default: []
+        }
     },
     autoDeleteSystem: {
         ModuleSwitchState: falseBool,
@@ -243,18 +243,18 @@ const configBotSchema = mongoose.Schema({
                 {
                     channelID: String,
                     channelName: String,
-                    timeBeforeDelete: Number, // time is in milliseconds (1 second = 1000 milliseconds)
-                },
+                    timeBeforeDelete: Number // time is in milliseconds (1 second = 1000 milliseconds)
+                }
             ],
-            default: [],
-        },
+            default: []
+        }
     },
     blackListWordSystem: {
         ModuleSwitchState: falseBool,
         listOfWords: { type: [String], default: [] },
         alertMention: falseBool,
         alertMentionRoles: { type: [String], default: [] },
-        channelToLog: emptyString,
+        channelToLog: emptyString
     },
     greetingSystem: {
         ModuleSwitchState: falseBool,
@@ -262,9 +262,9 @@ const configBotSchema = mongoose.Schema({
         triggers: {
             gettingRole: [String],
             onRoleGet: falseBool,
-            onJoin: falseBool,
+            onJoin: falseBool
         },
-        channelToSend: emptyString,
+        channelToSend: emptyString
     },
     serverStatsSystem: {
         // $user = number of user in the server // $online = number of member online in the server
@@ -275,12 +275,12 @@ const configBotSchema = mongoose.Schema({
                 {
                     statText: {
                         type: String, // You could write something like "User: $user | Online: $online"
-                        maxLength: 50,
+                        maxLength: 50
                     },
-                    role: [String], // if $role then only the first item will be used, if $rolelist then all roles will be taken into account
-                },
-            ],
-        },
+                    role: [String] // if $role then only the first item will be used, if $rolelist then all roles will be taken into account
+                }
+            ]
+        }
     },
     promotionSystem: {
         // This system will be used to manage promotion of members
@@ -292,7 +292,7 @@ const configBotSchema = mongoose.Schema({
         // in the logs we have a new entry whenever someone received a promotion or a demotion
         // each entry have infos about the member targeted, the date and old + new type of position (so we know what happened)
         // [TODO] later
-    },
+    }
 })
 
 module.exports = mongoose.model('guildbotconfig', configBotSchema)

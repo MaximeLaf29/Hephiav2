@@ -1,6 +1,6 @@
 const {
     ChatInputCommandInteraction,
-    SlashCommandBuilder,
+    SlashCommandBuilder
 } = require('discord.js')
 const fileContext = 'Commands/Public/ping.js, execute()'
 
@@ -32,10 +32,10 @@ module.exports = {
         interaction
             .reply({
                 content: msg,
-                ephemeral: true,
+                ephemeral: true
             })
             .catch((err) => {
                 console.log("Can't reply to Interaction! " + fileContext)
             })
-    },
+    }
 }

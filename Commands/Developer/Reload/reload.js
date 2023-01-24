@@ -16,5 +16,5 @@ module.exports = {
         )
         .addSubcommand((options) =>
             options.setName('events').setDescription('Reload your Events.')
-        ),
+        )
 }

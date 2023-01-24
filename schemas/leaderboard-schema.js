@@ -2,13 +2,13 @@ const mongoose = require('mongoose')
 
 const reqString = {
     type: String,
-    required: true,
+    required: true
 }
 
 const reqDefNumber = {
     type: Number,
     required: true,
-    default: 0,
+    default: 0
 }
 
 const userInfos = {
@@ -20,17 +20,17 @@ const userInfos = {
     memberRank: reqDefNumber,
     serverLeft: {
         type: Boolean,
-        default: true,
-    },
+        default: true
+    }
 }
 
 const leaderboardSchema = mongoose.Schema({
     guildID: {
         // the ID of the guild that owns these Datas
         type: String,
-        required: true,
+        required: true
     },
-    listOfMembers: [userInfos],
+    listOfMembers: [userInfos]
 })
 
 module.exports = mongoose.model('leaderboard', leaderboardSchema)

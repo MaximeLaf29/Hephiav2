@@ -16,7 +16,7 @@ module.exports = {
                 .reply({
                     content:
                         "This command is outdated or doesn't exist anymore.",
-                    ephemeral: true,
+                    ephemeral: true
                 })
                 .catch((err) => {
                     console.log("Can't reply to Interaction! " + fileContext)
@@ -29,7 +29,7 @@ module.exports = {
             return interaction
                 .reply({
                     content: 'This command is only available for developers.',
-                    ephemeral: true,
+                    ephemeral: true
                 })
                 .catch((err) => {
                     console.log("Can't reply to Interaction! " + fileContext)
@@ -43,7 +43,7 @@ module.exports = {
             return interaction
                 .reply({
                     content: 'This command is only available for the creator.',
-                    ephemeral: true,
+                    ephemeral: true
                 })
                 .catch((err) => {
                     console.log("Can't reply to Interaction! " + fileContext)
@@ -59,7 +59,7 @@ module.exports = {
                 return interaction
                     .reply({
                         content: 'This command is not available',
-                        ephemeral: true,
+                        ephemeral: true
                     })
                     .catch((err) => {
                         console.log(
@@ -72,5 +72,5 @@ module.exports = {
             // if the command wasn't using a subcommand, then just return the command itself
             command.execute(interaction, client)
         }
-    },
+    }
 }

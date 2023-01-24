@@ -31,7 +31,7 @@ module.exports = {
             seed: 3426390469,
             n_samples: 1,
             ucPreset: 2,
-            uc: 'lowres, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry',
+            uc: 'lowres, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry'
         }
         await interaction.deferReply()
         axios
@@ -48,7 +48,7 @@ module.exports = {
                     .editReply({
                         content: 'Picture:',
                         ephemeral: true,
-                        files: [{ attachment: sfbuff }],
+                        files: [{ attachment: sfbuff }]
                     })
                     .catch((_error) => {
                         console.log(
@@ -59,5 +59,5 @@ module.exports = {
             .catch((err) => {
                 console.log(err + ' - ' + fileContext)
             })
-    },
+    }
 }

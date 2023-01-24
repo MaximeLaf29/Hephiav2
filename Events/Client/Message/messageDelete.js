@@ -11,5 +11,5 @@ module.exports = {
      */
     execute(message, client) {
         console.log(message)
-    },
+    }
 }

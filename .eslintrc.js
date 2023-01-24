@@ -2,12 +2,12 @@ module.exports = {
     env: {
         node: true,
         commonjs: true,
-        es2021: true,
+        es2021: true
     },
     extends: ['eslint:recommended', 'prettier'],
     overrides: [],
     parserOptions: {
-        ecmaVersion: 'latest',
+        ecmaVersion: 'latest'
     },
     rules: {
         'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
@@ -19,9 +19,9 @@ module.exports = {
                     MethodDefinition: false,
                     ClassDeclaration: false,
                     ArrowFunctionExpression: false,
-                    FunctionExpression: false,
-                },
-            },
-        ],
-    },
+                    FunctionExpression: false
+                }
+            }
+        ]
+    }
 }

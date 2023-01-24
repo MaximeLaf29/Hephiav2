@@ -11,5 +11,5 @@ module.exports = {
         // age check system (for later)
         // system to check the userlistlastseen database to compare with current list of members of each guild
         //    and update the data of whoever isn't in the list (guild) anymore for each guild. (this is a protection against outages)
-    },
+    }
 }

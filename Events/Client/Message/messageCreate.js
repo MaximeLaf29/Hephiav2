@@ -31,5 +31,5 @@ module.exports = {
             console.log('ERROR! : ' + err)
         }
         // Loggings
-    },
+    }
 }
