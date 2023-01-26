@@ -1,6 +1,6 @@
-const { Message } = require('discord.js')
-Message
-
+"use strict";
+const { Message } = require('discord.js');
+Message;
 // Message creation event handler
 module.exports = {
     name: 'messageCreate',
@@ -10,9 +10,9 @@ module.exports = {
      * @param {client} client
      */
     async execute(message, client) {
-        this.execute.name = 'execute()'
-        if (message.author.bot) return
-
+        this.execute.name = 'execute()';
+        if (message.author.bot)
+            return;
         // Actions
         // console.log(message.content)
         /*message.reply('hahah!').catch(
@@ -32,13 +32,11 @@ module.exports = {
         // invite link detector here
         // DB changes
         try {
-            await client.db.memberMessageIncrement(
-                message.guild,
-                message.author
-            )
-        } catch (err) {
-            console.log('ERROR! : ' + err)
+            await client.db.memberMessageIncrement(message.guild, message.author);
+        }
+        catch (err) {
+            console.log('ERROR! : ' + err);
         }
         // Loggings
     }
-}
+};

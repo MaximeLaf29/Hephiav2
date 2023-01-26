@@ -4,7 +4,12 @@ module.exports = {
         commonjs: true,
         es2021: true
     },
-    extends: ['eslint:recommended', 'prettier'],
+    extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'prettier'
+    ],
+    parser: '@typescript-eslint/parser',
     overrides: [],
     parserOptions: {
         ecmaVersion: 'latest'

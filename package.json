@@ -2,7 +2,7 @@
     "name": "hephia-v2",
     "version": "1.0.0",
     "description": "Discord Bot Hephia Version 2",
-    "main": "main.js",
+    "main": "src/main.ts",
     "dependencies": {
         "ascii-table": "^0.0.9",
         "axios": "^1.2.3",
@@ -16,8 +16,8 @@
         "nodemon": "^2.0.20"
     },
     "scripts": {
-        "start": "node main.js",
-        "dev": "nodemon main.js",
+        "start": "tsc && node build/main.js",
+        "dev": "nodemon .",
         "format": "npm run prettier:fix && npm run lint:fix",
         "prettier": "npx prettier --check .",
         "prettier:fix": "npx prettier --write .",
@@ -27,9 +27,13 @@
     "author": "lolmaxz",
     "license": "ISC",
     "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.49.0",
+        "@typescript-eslint/parser": "^5.49.0",
         "eslint": "^8.32.0",
         "eslint-config-google": "^0.14.0",
         "eslint-config-prettier": "^8.6.0",
-        "prettier": "2.8.3"
+        "prettier": "2.8.3",
+        "ts-node": "^10.9.1",
+        "typescript": "^4.9.4"
     }
 }
