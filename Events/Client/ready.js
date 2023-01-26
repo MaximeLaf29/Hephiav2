@@ -1,5 +1,4 @@
 const { loadCommands } = require('../../Handlers/commandHandler')
-const fileContext = 'Events/ready.js, execute()'
 module.exports = {
     name: 'ready',
     once: true,

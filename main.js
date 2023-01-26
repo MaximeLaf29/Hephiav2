@@ -42,6 +42,7 @@ loadEvents(client)
 // We load all the guild's configs into the client object for easy access
 const { loadGuildConfigs } = require('./Functions/configLoader.js')
 loadGuildConfigs(client)
+console.log(__dirname)
 
 // # Config stuff removed from here so it's more clean
 // --------- TEST ZONE -----------//

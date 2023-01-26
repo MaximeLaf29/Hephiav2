@@ -203,7 +203,7 @@ const configBotSchema = mongoose.Schema({
     },
     ticketSystem: {
         // Custom Ticket system to be done to replace TicketBot
-        type: [String],
+        type: [ticketType],
         default: []
         // [TODO]
         // message autopost + switch

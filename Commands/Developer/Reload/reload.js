@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
-const fileContext = 'Commands/Developer/Reload/reload.js, execute()'
 
 // Command that allow to reload the commands files or event handlers with each a sub command
 module.exports = {
