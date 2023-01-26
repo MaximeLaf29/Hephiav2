@@ -3,7 +3,7 @@ import { Client, ClientOptions, Collection } from 'discord.js'
 class DiscordBot extends Client {
     developers: string[]
     creator: string
-    reloding: boolean
+    reloading: boolean
 
     commands: Collection<string, any>
     subCommands: Collection<string, any>
@@ -16,7 +16,7 @@ class DiscordBot extends Client {
         this.developers = []
         this.creator = ''
 
-        this.reloding = false
+        this.reloading = false
 
         this.commands = new Collection<string, any>()
         this.subCommands = new Collection<string, any>()

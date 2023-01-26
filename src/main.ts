@@ -31,7 +31,7 @@ client.db = dbAPI // TODO: Change this motherfucker to Prisma (https://www.prism
 console.log('Connected!') // Test for the colors library
 
 // Loading all the event handlers
-import { loadEvents } from './Handlers/eventHandler'
+import loadEvents from './Handlers/eventHandler'
 loadEvents(client)
 
 // We load all the guild's configs into the client object for easy access
