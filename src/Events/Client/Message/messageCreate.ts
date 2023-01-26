@@ -1,34 +1,41 @@
-import { Message } from 'discord.js'
+import { Events, Message } from 'discord.js'
 import DiscordBot from '../../../Client/discordBot'
+import { Event } from '../../../types/Event'
 
-const messageCreate = async (message: Message, client: DiscordBot) => {
-    if (message.author.bot) return
+const messageCreate: Event<Events.MessageCreate> = {
+    name: Events.MessageCreate,
+    listener: async (message: Message & { client: DiscordBot }) => {
+        if (message.author.bot) return
 
-    // Actions
-    // console.log(message.content)
-    message
-        .reply('hahah!')
-        .catch((err) =>
-            console.log(
-                'There was an error replying. "' +
-                    __filename +
-                    ', ' +
-                    ' | Error: ' +
-                    err.message
+        // Actions
+        // console.log(message.content)
+        message
+            .reply('hahah!')
+            .catch((err) =>
+                console.log(
+                    'There was an error replying. "' +
+                        __filename +
+                        ', ' +
+                        ' | Error: ' +
+                        err.message
+                )
             )
-        )
-    // check for bumps
-    // BlackListed words system here
-    // exp system here (if no blacklisted words)
-    // check for doxbin stuff posted here
-    // invite link detector here
-    // DB changes
-    try {
-        await client.db.memberMessageIncrement(message.guild, message.author)
-    } catch (err) {
-        console.log('ERROR! : ' + err)
+        // check for bumps
+        // BlackListed words system here
+        // exp system here (if no blacklisted words)
+        // check for doxbin stuff posted here
+        // invite link detector here
+        // DB changes
+        try {
+            await message.client.db.memberMessageIncrement(
+                message.guild,
+                message.author
+            )
+        } catch (err) {
+            console.log('ERROR! : ' + err)
+        }
+        // Loggings
     }
-    // Loggings
 }
 
 export default messageCreate
