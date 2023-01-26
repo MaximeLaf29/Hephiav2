@@ -1,7 +1,15 @@
 const userSchema = require('./schemas/user-schema')
-const fileContext = 'dbDiscordAPI.js'
-// removed useless requires
+const { Guild, User, GuildMember } = require('discord.js')
+Guild
+User
+GuildMember
 
+/**
+ *
+ * @param {Guild} guild
+ * @param {User} userObj
+ * @returns
+ */
 async function userExistInDB(guild, userObj) {
     let userFound = false
     try {
@@ -23,6 +31,11 @@ async function userExistInDB(guild, userObj) {
     return userFound
 }
 
+/**
+ *
+ * @param {Guild} guild
+ * @param {User} userObj
+ */
 async function memberCreateInDB(guild, userObj) {
     try {
         const user = {
@@ -39,6 +52,13 @@ async function memberCreateInDB(guild, userObj) {
     }
 }
 
+/**
+ *
+ * @param {Guild} guild
+ * @param {GuildMember} oldMember
+ * @param {GuildMember} newMember
+ * @returns
+ */
 async function memberGuildNicknameChanged(guild, oldMember, newMember) {
     if (!(await userExistInDB(guild, oldMember.user))) {
         await memberCreateInDB(guild, oldMember.user)
@@ -70,6 +90,12 @@ async function memberGuildNicknameChanged(guild, oldMember, newMember) {
     return true
 }
 
+/**
+ *
+ * @param {Guild} guild
+ * @param {User} userObj
+ * @returns {boolean} whether if the user message increments in the database was successful
+ */
 async function memberMessageIncrement(guild, userObj) {
     if (!(await userExistInDB(guild, userObj))) {
         await memberCreateInDB(guild, userObj)

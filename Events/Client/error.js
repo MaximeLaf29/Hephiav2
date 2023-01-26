@@ -1,13 +1,14 @@
-const { Error, MessageEmbed } = require('discord.js')
-const { loadCommands } = require('../../Handlers/commandHandler')
+const { Error } = require('discord.js')
+Error
+
+// Event Listener for error events
 module.exports = {
     name: 'error',
     /**
      *
      * @param {Error} error
-     * @param {client} client
      */
-    execute(error, client) {
+    execute(error) {
         console.log('An error occurred! -> ' + error)
     }
 }

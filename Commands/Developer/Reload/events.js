@@ -1,7 +1,7 @@
 const { ChatInputCommandInteraction, Client } = require('discord.js')
 const { loadEvents } = require('../../../Handlers/eventHandler')
-const fileContext = 'Commands/Developer/Reload/events.js, execute()'
-
+ChatInputCommandInteraction
+Client
 module.exports = {
     subCommand: 'reload.events',
     /**
@@ -18,7 +18,14 @@ module.exports = {
         interaction
             .reply({ content: 'Reloaded Events', ephemeral: true })
             .catch((err) => {
-                console.log("Can't reply to interaction! " + fileContext)
+                console.log(
+                    "Can't reply to interaction! " +
+                        __filename +
+                        ', ' +
+                        this.execute.name +
+                        ' | Error: ' +
+                        err.message
+                )
             })
     }
 }

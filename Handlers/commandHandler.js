@@ -1,3 +1,8 @@
+/**
+ *
+ * @param {*} client
+ * @returns
+ */
 async function loadCommands(client) {
     const { loadFiles } = require('../Functions/fileLoader')
     const ascii = require('ascii-table')

@@ -1,5 +1,5 @@
-const { Message, MessageEmbed } = require('discord.js')
-const fileContext = 'Events/Client/Message/messageDelete.js, execute()'
+const { Message } = require('discord.js')
+Message
 
 // Message deleted event handler
 module.exports = {
@@ -11,5 +11,6 @@ module.exports = {
      */
     execute(message, client) {
         console.log(message)
+        console.log(client)
     }
 }

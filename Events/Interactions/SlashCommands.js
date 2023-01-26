@@ -1,6 +1,7 @@
 const { ChatInputCommandInteraction } = require('discord.js')
-const fileContext = 'Events/Interactions/SlashCommands.js, execute()'
+ChatInputCommandInteraction
 
+// Event Listener for slash commands
 module.exports = {
     name: 'interactionCreate',
     /**
@@ -19,7 +20,14 @@ module.exports = {
                     ephemeral: true
                 })
                 .catch((err) => {
-                    console.log("Can't reply to Interaction! " + fileContext)
+                    console.log(
+                        "Can't reply to Interaction! " +
+                            __filename +
+                            ', ' +
+                            this.execute.name +
+                            ' | Error: ' +
+                            err.message
+                    )
                 })
 
         if (
@@ -32,7 +40,14 @@ module.exports = {
                     ephemeral: true
                 })
                 .catch((err) => {
-                    console.log("Can't reply to Interaction! " + fileContext)
+                    console.log(
+                        "Can't reply to Interaction! " +
+                            __filename +
+                            ', ' +
+                            this.execute.name +
+                            ' | Error: ' +
+                            err.message
+                    )
                 })
         }
 
@@ -46,7 +61,14 @@ module.exports = {
                     ephemeral: true
                 })
                 .catch((err) => {
-                    console.log("Can't reply to Interaction! " + fileContext)
+                    console.log(
+                        "Can't reply to Interaction! " +
+                            __filename +
+                            ', ' +
+                            this.execute.name +
+                            ' | Error: ' +
+                            err.message
+                    )
                 })
         }
 
@@ -63,7 +85,12 @@ module.exports = {
                     })
                     .catch((err) => {
                         console.log(
-                            "Can't reply to Interaction! " + fileContext
+                            "Can't reply to Interaction! " +
+                                __filename +
+                                ', ' +
+                                this.execute.name +
+                                ' | Error: ' +
+                                err.message
                         )
                     })
             }

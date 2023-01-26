@@ -1,5 +1,6 @@
-const { Message, MessageEmbed } = require('discord.js')
-const fileContext = 'Events/Message/messageCreate.js, execute()'
+const { Message } = require('discord.js')
+Message
+
 // Message creation event handler
 module.exports = {
     name: 'messageCreate',
@@ -9,13 +10,21 @@ module.exports = {
      * @param {client} client
      */
     async execute(message, client) {
+        this.execute.name = 'execute()'
         if (message.author.bot) return
 
         // Actions
-        console.log(message.content)
-        message
-            .reply('hahah!')
-            .catch(console.log('There was an error replying. ' + fileContext))
+        // console.log(message.content)
+        /*message.reply('hahah!').catch(
+            console.log((err) => {
+                'There was an error replying. "' +
+                    __filename +
+                    ', ' +
+                    this.execute.name +
+                    ' | Error: ' +
+                    err.message
+            })
+        )*/
         // check for bumps
         // BlackListed words system here
         // exp system here (if no blacklisted words)

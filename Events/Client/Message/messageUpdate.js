@@ -1,5 +1,5 @@
-const { Message, MessageEmbed } = require('discord.js')
-const fileContext = 'Events/Client/Message/messageUpdate.js, execute()'
+const { Message } = require('discord.js')
+Message
 
 // Message updated event handler
 module.exports = {
@@ -12,5 +12,6 @@ module.exports = {
      */
     async execute(message, client) {
         // Loggings to discord following guild's config
+        console.log(message + client)
     }
 }
