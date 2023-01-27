@@ -1,17 +1,12 @@
-const { ChatInputCommandInteraction, Client } = require('discord.js')
-const { loadEvents } = require('../../../Handlers/eventHandler')
-ChatInputCommandInteraction
-Client
-module.exports = {
+import { ChatInputCommandInteraction } from 'discord.js'
+import DiscordBot from '../../../Client/discordBot'
+import loadEvents from '../../../Handlers/eventHandler'
+
+const eventsCommandSub = {
     subCommand: 'reload.events',
-    /**
-     *
-     * @param {ChatInputCommandInteraction} interaction
-     * @param {Client} client
-     */
-    execute(interaction, client) {
+    execute(interaction: ChatInputCommandInteraction, client: DiscordBot) {
         for (const [key, value] of client.events) {
-            client.removeListener(`${key}`, value, true)
+            client.removeListener(`${key}`, value)
         }
         client.reloading = true
         loadEvents(client)
@@ -29,3 +24,5 @@ module.exports = {
             })
     }
 }
+
+export default eventsCommandSub

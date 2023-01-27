@@ -1,10 +1,9 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
+import { SlashCommandBuilder, PermissionFlagsBits } from 'discord.js'
 
 // Command that allow to reload the commands files or event handlers with each a sub command
-module.exports = {
+const reloadCommand = {
     developer: false,
     creator: true,
-
     data: new SlashCommandBuilder()
         .setName('reload')
         .setDescription('Reload your commands/events.')
@@ -17,3 +16,5 @@ module.exports = {
             options.setName('events').setDescription('Reload your Events.')
         )
 }
+
+export default reloadCommand

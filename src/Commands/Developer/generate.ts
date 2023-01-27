@@ -1,8 +1,8 @@
-const { SlashCommandBuilder } = require('discord.js')
-const axios = require('axios')
+import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js'
+import axios, { AxiosResponse } from 'axios'
 const fileContext = 'Commands/Developer/generate.js, execute()'
 
-module.exports = {
+const generateCommand = {
     data: new SlashCommandBuilder()
         .setName('generate')
         .setDescription('Generate a picture.')
@@ -14,11 +14,7 @@ module.exports = {
                 .setMaxLength(512)
                 .setRequired(true)
         ),
-    /**
-     *
-     * @param {ChatInputCommandInteraction} interaction
-     */
-    async execute(interaction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         const genPrompt = interaction.options.getString('prompt')
 
         const data = {
@@ -36,23 +32,28 @@ module.exports = {
         await interaction.deferReply()
         axios
             .post('http://localhost:6969/generate', data)
-            .then(async (res) => {
-                console.log(`Status Code:${res.statusCode}`)
+            .then(async (res: AxiosResponse) => {
+                console.log(`Status Code:${res.status}`)
                 const pictureBase64 = res.data.output[0]
 
                 // eslint-disable-next-line new-cap
-                const sfbuff = new Buffer.from(pictureBase64, 'base64')
+                const sfbuff = Buffer.from(pictureBase64, 'base64')
 
                 // await wait(4000)
                 await interaction
                     .editReply({
                         content: 'Picture:',
-                        ephemeral: true,
+                        options: {
+                            ephemeral: true
+                        },
                         files: [{ attachment: sfbuff }]
                     })
-                    .catch((_error) => {
+                    .catch((error) => {
                         console.log(
-                            "Can't edit reply to interaction! " + fileContext
+                            "Can't edit reply to interaction! " +
+                                fileContext +
+                                ' | ' +
+                                error
                         )
                     })
             })
@@ -61,3 +62,5 @@ module.exports = {
             })
     }
 }
+
+export default generateCommand

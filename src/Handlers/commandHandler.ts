@@ -1,3 +1,4 @@
+import { ApplicationCommandDataResolvable } from 'discord.js'
 import DiscordBot from '../Client/discordBot'
 import loadFiles from '../Functions/fileLoader'
 
@@ -5,12 +6,12 @@ async function loadCommands(client: DiscordBot) {
     await client.commands.clear()
     await client.subCommands.clear()
 
-    const commandsArray: any[] = []
+    const commandsArray: ApplicationCommandDataResolvable[] = []
 
     const Files = await loadFiles('Commands')
 
-    Files.forEach(async (filePath: string) => {
-        const command = await import(filePath)
+    const importPromises = Files.map(async (filePath: string) => {
+        const { default: command } = await import(filePath)
 
         // If the command file loaded has subcommand(s) inside it
         if (command.subCommand) {
@@ -24,6 +25,8 @@ async function loadCommands(client: DiscordBot) {
         console.log(command.data.name, '🟩')
     })
 
+    await Promise.all(importPromises)
+
     client.application?.commands.set(commandsArray)
 
     return console.log(
@@ -31,4 +34,4 @@ async function loadCommands(client: DiscordBot) {
     )
 }
 
-module.exports = { loadCommands }
+export default loadCommands

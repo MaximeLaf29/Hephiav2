@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const reqString = {
     type: String,
@@ -24,7 +24,7 @@ const userInfos = {
     }
 }
 
-const leaderboardSchema = mongoose.Schema({
+const leaderboardSchema = new mongoose.Schema({
     guildID: {
         // the ID of the guild that owns these Datas
         type: String,
@@ -33,4 +33,4 @@ const leaderboardSchema = mongoose.Schema({
     listOfMembers: [userInfos]
 })
 
-module.exports = mongoose.model('leaderboard', leaderboardSchema)
+export default mongoose.model('leaderboard', leaderboardSchema)

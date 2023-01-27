@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 // --- This is the new Data Type that will be saved for each users --- //
 
@@ -88,7 +88,7 @@ const memberLeavingModel = {
     executerID: emptyString // the user ID of the executer of the kick/ban, if type != 0 only
 }
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
     guildID: reqString, // The ID of the guild that this user belongs to (REQUIRED)
     userID: reqString, // The ID of this user (REQUIRED)
     discordUsername: emptyString, // The current or last recorded Username of the user
@@ -129,4 +129,4 @@ const userSchema = mongoose.Schema({
     // blabla: emptyString
 })
 
-module.exports = mongoose.model('users', userSchema)
+export default mongoose.model('users', userSchema)

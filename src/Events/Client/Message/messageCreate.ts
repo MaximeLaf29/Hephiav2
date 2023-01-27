@@ -6,6 +6,7 @@ const messageCreate: Event<Events.MessageCreate> = {
     name: Events.MessageCreate,
     listener: async (message: Message & { client: DiscordBot }) => {
         if (message.author.bot) return
+        console.log(message.client)
 
         // Actions
         // console.log(message.content)

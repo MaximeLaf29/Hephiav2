@@ -1,13 +1,10 @@
-const {
-    ChatInputCommandInteraction,
-    SlashCommandBuilder
-} = require('discord.js')
+import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js'
+import DiscordBot from '../../Client/discordBot'
 
-ChatInputCommandInteraction
-module.exports = {
+const pingCommand = {
     data: new SlashCommandBuilder()
         .setName('ping')
-        .setDescription('Will Reply with Pong.')
+        .setDescription('Will Reply with Pong!!.')
         .setDMPermission(false)
         .addIntegerOption((options) =>
             options
@@ -16,11 +13,9 @@ module.exports = {
                 .setMinValue(2)
                 .setMaxValue(4)
         ),
-    /**
-     *
-     * @param {ChatInputCommandInteraction} interaction
-     */
-    execute(interaction) {
+    async execute(
+        interaction: ChatInputCommandInteraction & { client: DiscordBot }
+    ) {
         let msg = 'Pong! '
         const numberPong = interaction.options.getInteger('howmuch')
         if (numberPong) {
@@ -46,3 +41,5 @@ module.exports = {
             })
     }
 }
+
+export default pingCommand

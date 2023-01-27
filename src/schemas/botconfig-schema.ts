@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 // This schema is useful for the bot in case it crashes and some users join and/or leave while the bot is down
 // It can then use this list to update everything after comparing who is still in the server and who is gone.
@@ -66,7 +66,7 @@ const ticketType = {
     roleToPing: { type: [String], default: [] } // list of roles being pinged when a ticket is opened
 }
 
-const configBotSchema = mongoose.Schema({
+const configBotSchema = new mongoose.Schema({
     guildID: reqString, // the ID of the guild that owns these Datas
     discordLoggerModule: {
         // General Switch
@@ -295,7 +295,7 @@ const configBotSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('guildbotconfig', configBotSchema)
+export default mongoose.model('guildbotconfig', configBotSchema)
 
 /*  ticketNamingScheme ----
 For ticketNamingScheme you can use multiple placeholder names different.

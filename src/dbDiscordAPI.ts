@@ -1,16 +1,7 @@
-const userSchema = require('./schemas/user-schema')
-const { Guild, User, GuildMember } = require('discord.js')
-Guild
-User
-GuildMember
+import userSchema from './schemas/user-schema'
+import { Guild, User, GuildMember } from 'discord.js'
 
-/**
- *
- * @param {Guild} guild
- * @param {User} userObj
- * @returns
- */
-async function userExistInDB(guild, userObj) {
+async function userExistInDB(guild: Guild, userObj: User) {
     let userFound = false
     try {
         const result = await userSchema.find({
@@ -36,7 +27,7 @@ async function userExistInDB(guild, userObj) {
  * @param {Guild} guild
  * @param {User} userObj
  */
-async function memberCreateInDB(guild, userObj) {
+async function memberCreateInDB(guild: Guild, userObj: User) {
     try {
         const user = {
             guildID: guild.id,
@@ -59,7 +50,11 @@ async function memberCreateInDB(guild, userObj) {
  * @param {GuildMember} newMember
  * @returns
  */
-async function memberGuildNicknameChanged(guild, oldMember, newMember) {
+async function memberGuildNicknameChanged(
+    guild: Guild,
+    oldMember: GuildMember,
+    newMember: GuildMember
+) {
     if (!(await userExistInDB(guild, oldMember.user))) {
         await memberCreateInDB(guild, oldMember.user)
     }
@@ -96,7 +91,7 @@ async function memberGuildNicknameChanged(guild, oldMember, newMember) {
  * @param {User} userObj
  * @returns {boolean} whether if the user message increments in the database was successful
  */
-async function memberMessageIncrement(guild, userObj) {
+async function memberMessageIncrement(guild: Guild, userObj: User) {
     if (!(await userExistInDB(guild, userObj))) {
         await memberCreateInDB(guild, userObj)
     }
@@ -122,7 +117,7 @@ async function memberMessageIncrement(guild, userObj) {
     return true
 }
 
-module.exports = {
+export default {
     userExistInDB,
     memberMessageIncrement,
     memberCreateInDB,

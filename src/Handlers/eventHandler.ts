@@ -9,25 +9,23 @@ async function loadEvents(client: DiscordBot) {
 
     Files.forEach(async (filePath: string) => {
         // eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
-        const {
-            default: file
-        }: { default: Event<any> & { execute: () => void } } = await import(
+        const { default: file }: { default: Event<any> } = await import(
             filePath
         )
 
-        client.events.set(file.name, file.listener ?? file.execute)
+        client.events.set(file.name, file.listener)
 
         if (file.rest) {
             if (file.once) {
-                client.rest.once(file.name, file.listener ?? file.execute)
+                client.rest.once(file.name, file.listener)
             } else {
-                client.rest.on(file.name, file.listener ?? file.execute)
+                client.rest.on(file.name, file.listener)
             }
         } else {
             if (file.once) {
-                client.once(file.name, file.listener ?? file.execute)
+                client.once(file.name, file.listener)
             } else {
-                client.on(file.name, file.listener ?? file.execute)
+                client.on(file.name, file.listener)
             }
         }
         console.log(file.name, '🟩')

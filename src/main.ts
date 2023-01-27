@@ -3,7 +3,7 @@ dotenv.config()
 
 import Discord from 'discord.js'
 import mongo from './mongo'
-import dbAPI from './dbDiscordAPI.js'
+import dbAPI from './dbDiscordAPI'
 import DiscordBot from './Client/discordBot'
 
 import { IntentsBitField } from 'discord.js'
@@ -23,8 +23,12 @@ const intents = new Discord.IntentsBitField([
 
 const client = new DiscordBot({ intents })
 
+const dbURL: string | undefined = process.env.DATABASE
 // Connection to database
-mongo(process.env.DATABASE).then(() =>
+if (!dbURL) {
+    throw new Error('DATABASE env variable is not set')
+}
+mongo(dbURL).then(() =>
     console.log('🔗 The client is now connected to the database. 🔗')
 )
 client.db = dbAPI // TODO: Change this motherfucker to Prisma (https://www.prisma.io).
@@ -35,7 +39,7 @@ import loadEvents from './Handlers/eventHandler'
 loadEvents(client)
 
 // We load all the guild's configs into the client object for easy access
-import { loadGuildConfigs } from './Functions/configLoader.js'
+import loadGuildConfigs from './Functions/configLoader'
 loadGuildConfigs(client)
 
 // # Config stuff removed from here so it's more clean
