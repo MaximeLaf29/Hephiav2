@@ -132,4 +132,4 @@ dist
 #Spefics
 
 config.json
-Start.bat
+.build/
