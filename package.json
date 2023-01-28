@@ -4,6 +4,7 @@
     "description": "Discord Bot Hephia Version 2",
     "main": "src/main.ts",
     "dependencies": {
+        "@estarink/ascii-table": "^0.1.2",
         "ascii-table": "^0.0.9",
         "axios": "^1.2.3",
         "colors": "^1.4.0",

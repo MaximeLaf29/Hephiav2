@@ -1,10 +1,12 @@
 import { ApplicationCommandDataResolvable } from 'discord.js'
 import DiscordBot from '../Client/discordBot'
 import loadFiles from '../Functions/fileLoader'
+import ascii from '@estarink/ascii-table'
 
 async function loadCommands(client: DiscordBot) {
     await client.commands.clear()
     await client.subCommands.clear()
+    const table = new ascii('List of Commands').setHeading('Commands', 'Status')
 
     const commandsArray: ApplicationCommandDataResolvable[] = []
 
@@ -22,7 +24,7 @@ async function loadCommands(client: DiscordBot) {
 
         commandsArray.push(command.data.toJSON())
 
-        console.log(command.data.name, '🟩')
+        table.addRow(command.data.name, '🟩')
     })
 
     await Promise.all(importPromises)
@@ -30,6 +32,7 @@ async function loadCommands(client: DiscordBot) {
     client.application?.commands.set(commandsArray)
 
     return console.log(
+        table.toString(),
         client.reloading ? '\nCommands Reloaded.' : '\nCommands Loaded.'
     )
 }

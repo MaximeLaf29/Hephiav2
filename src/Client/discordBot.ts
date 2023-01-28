@@ -1,4 +1,5 @@
 import { Client, ClientOptions, Collection } from 'discord.js'
+import configDev from '../config.json'
 
 class DiscordBot extends Client {
     developers: string[]
@@ -13,8 +14,8 @@ class DiscordBot extends Client {
 
     constructor(options: ClientOptions) {
         super(options)
-        this.developers = []
-        this.creator = ''
+        this.developers = configDev.developersID
+        this.creator = configDev.creatorID
 
         this.reloading = false
 

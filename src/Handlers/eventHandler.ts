@@ -1,13 +1,18 @@
 import DiscordBot from '../Client/discordBot'
 import loadFiles from '../Functions/fileLoader'
 import { Event } from '../types/Event'
+import ascii from '@estarink/ascii-table'
 
 async function loadEvents(client: DiscordBot) {
     await client.events.clear()
-
     const Files = await loadFiles('Events')
 
-    Files.forEach(async (filePath: string) => {
+    const tableEvents = new ascii('List of Events').setHeading(
+        'Events',
+        'Status'
+    )
+
+    const promises = Files.map(async (filePath: string) => {
         // eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
         const { default: file }: { default: Event<any> } = await import(
             filePath
@@ -28,10 +33,13 @@ async function loadEvents(client: DiscordBot) {
                 client.on(file.name, file.listener)
             }
         }
-        console.log(file.name, '🟩')
-    })
 
-    return console.log(
+        return tableEvents.addRow(file.name, '🟩')
+    })
+    await Promise.all(promises)
+
+    console.log(
+        tableEvents.toString(),
         client.reloading ? '\nEvents Reloaded.' : '\nEvents Loaded.'
     )
 }

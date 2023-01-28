@@ -28,9 +28,13 @@ const dbURL: string | undefined = process.env.DATABASE
 if (!dbURL) {
     throw new Error('DATABASE env variable is not set')
 }
-mongo(dbURL).then(() =>
-    console.log('🔗 The client is now connected to the database. 🔗')
-)
+mongo(dbURL)
+    .then(() =>
+        console.log('🔗 The client is now connected to the database. 🔗')
+    )
+    .catch((err) =>
+        console.log('Error while connecting to the database: ' + err.message)
+    )
 client.db = dbAPI // TODO: Change this motherfucker to Prisma (https://www.prisma.io).
 console.log('Connected!') // Test for the colors library
 
