@@ -31,3 +31,9 @@ Current functionality:
 -   Client can store information about all the guild's configuration
 
 Following the Second commit on January 24th, 2022, a dev brand will be used.
+
+#How to install
+---
+clone the repertory
+run ``npm i`` to install the dependencies
+run ``npm run dev`` for now
