@@ -4,8 +4,8 @@ import { Event } from '../types/Event'
 import ascii from '@estarink/ascii-table'
 
 async function loadEvents(client: DiscordBot) {
-    await client.events.clear()
-    const Files = await loadFiles('Events')
+    client.events.clear()
+    const Files = loadFiles('Events')
 
     const tableEvents = new ascii('List of Events').setHeading(
         'Events',
