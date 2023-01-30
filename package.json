@@ -11,13 +11,12 @@
         "discord.js": "^14.7.1",
         "dotenv": "^16.0.3",
         "edit-json-file": "^1.7.0",
-        "glob": "^8.0.3",
         "moment": "^2.29.4",
         "mongoose": "^6.8.4",
         "nodemon": "^2.0.20"
     },
     "scripts": {
-        "start": "tsc && node build/main.js",
+        "start": "tsc && node dist/main.js",
         "dev": "nodemon .",
         "format": "npm run prettier:fix && npm run lint:fix",
         "prettier": "npx prettier --check .",

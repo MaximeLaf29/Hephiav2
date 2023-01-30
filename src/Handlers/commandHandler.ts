@@ -4,13 +4,13 @@ import loadFiles from '../Functions/fileLoader'
 import ascii from '@estarink/ascii-table'
 
 async function loadCommands(client: DiscordBot) {
-    await client.commands.clear()
-    await client.subCommands.clear()
+    client.commands.clear()
+    client.subCommands.clear()
     const table = new ascii('List of Commands').setHeading('Commands', 'Status')
 
     const commandsArray: ApplicationCommandDataResolvable[] = []
 
-    const Files = await loadFiles('Commands')
+    const Files = loadFiles('Commands')
 
     const importPromises = Files.map(async (filePath: string) => {
         const { default: command } = await import(filePath)
