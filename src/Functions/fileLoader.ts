@@ -1,14 +1,14 @@
 import path from 'path'
-import fs from 'fs'
+import fs from 'fs/promises'
 
-function getAllFilePaths(dir: string): string[] {
-    const files = fs.readdirSync(dir)
+async function getAllFilePaths(dir: string): Promise<string[]> {
+    const files = await fs.readdir(dir)
     const filePaths: string[] = []
     for (const file of files) {
         const filePath = path.join(dir, file)
-        const fileStat = fs.statSync(filePath)
+        const fileStat = await fs.stat(filePath)
         if (fileStat.isDirectory()) {
-            filePaths.push(...getAllFilePaths(filePath))
+            filePaths.push(...(await getAllFilePaths(filePath)))
         } else {
             filePaths.push(filePath)
         }
@@ -16,12 +16,12 @@ function getAllFilePaths(dir: string): string[] {
     return filePaths
 }
 
-function loadFiles(dirName: string): string[] {
+async function fileLoader(dirName: string): Promise<string[]> {
     const directory = `${path.resolve(__dirname, '../')}/${dirName}`
 
-    const files = getAllFilePaths(directory)
+    const files = await getAllFilePaths(directory)
 
     return files
 }
 
-export default loadFiles
+export default fileLoader
