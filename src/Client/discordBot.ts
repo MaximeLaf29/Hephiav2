@@ -1,28 +1,57 @@
-import { Client, ClientOptions, Collection } from 'discord.js'
-import configDev from '../config.json'
+import {
+    ApplicationCommandDataResolvable,
+    Client,
+    ClientEvents,
+    Collection
+} from 'discord.js'
+import { CommandType } from '../types/Command'
+
+import fileLoader from '../Functions/fileLoader'
+import { RegisterCommandsOptions } from '../types/Client'
+import { Event } from '../Structures/Event'
+import importFile from '../Functions/importFile'
 
 class DiscordBot extends Client {
-    developers: string[]
-    creator: string
-    reloading: boolean
+    commands: Collection<string, CommandType> = new Collection()
 
-    commands: Collection<string, any>
-    subCommands: Collection<string, any>
-    events: Collection<string, any>
-    guildConfigs: Collection<string, any>
-    db: any
+    constructor() {
+        super({ intents: 130943 })
+    }
 
-    constructor(options: ClientOptions) {
-        super(options)
-        this.developers = configDev.developersID
-        this.creator = configDev.creatorID
+    start() {
+        this.registerModules()
+        this.login(process.env.TOKEN)
+    }
 
-        this.reloading = false
+    async registerCommands({ commands, guildId }: RegisterCommandsOptions) {
+        if (guildId) {
+            this.guilds.cache.get(guildId)?.commands.set(commands)
+            console.log(`Registering commands to ${guildId}`)
+        } else {
+            this.application?.commands.set(commands)
+            console.log(`Registering commands globally`)
+        }
+    }
 
-        this.commands = new Collection<string, any>()
-        this.subCommands = new Collection<string, any>()
-        this.events = new Collection<string, any>()
-        this.guildConfigs = new Collection<string, any>()
+    async registerModules() {
+        console.log('Registering modules')
+        // Commands
+        const slashCommands: ApplicationCommandDataResolvable[] = []
+        const commandFiles = await fileLoader('Commands')
+        commandFiles.forEach(async (filePath) => {
+            const command: CommandType = await importFile(filePath)
+            if (!command.name) return
+
+            this.commands.set(command.name, command)
+            slashCommands.push(command)
+        })
+
+        //Events
+        const eventFiles = await fileLoader('Events')
+        eventFiles.forEach(async (filePath) => {
+            const event: Event<keyof ClientEvents> = await importFile(filePath)
+            this.on(event.event, event.run)
+        })
     }
 }
 
